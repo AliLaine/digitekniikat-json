@@ -1,7 +1,7 @@
 {
   "otsikko": "JSON-datan käsittely",
   "kuvaus": "Tässä tehtävässä haetaan oma JSON-tiedosto ja näytetään sen tiedot sivulla.",
-  "kuva": "https://via.placeholder.com/900x300?text=JSON+Tehtava",
+ "kuva": "https://picsum.photos/900/300?random=2",
   "opintojakso": {
     "nimi": "Digitekniikat",
     "tunnus": "DIG007AS2A-3016",
