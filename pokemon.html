@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <title>Pokemon haku</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Tyylit -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Ylävalikko -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand" href="./"><b>JSON & Fetch API</b></a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="json.html">Oma tietue</a></li>
+          <li class="nav-item"><a class="nav-link" href="toteutus.html">Toteutus JSON</a></li>
+          <li class="nav-item"><a class="nav-link active" href="pokemon.html">Poke haku</a></li>
+          <li class="nav-item"><a class="nav-link" href="saa.html">Sää Helsinki</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sivun sisältö -->
+  <main class="container">
+    <div class="card p-4">
+      <h1>Poke haku</h1>
+      <p>Kirjoita Pokemonin nimi (esim. pikachu, bulbasaur) ja paina Hae.</p>
+
+      <div class="row g-3 align-items-end">
+        <div class="col-12 col-md-6">
+          <label for="pokemonName" class="form-label">Pokemonin nimi</label>
+          <input type="text" id="pokemonName" class="form-control" placeholder="esim. eevee">
+        </div>
+        <div class="col-12 col-md-6 d-flex gap-2">
+          <button class="btn btn-primary" onclick="poke()">Hae</button>
+          <button id="kaannaBtn" class="btn btn-outline-secondary d-none" onclick="kaanna()">Käännä</button>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Näytetään haetut tiedot -->
+      <div id="nimi" class="fs-4 fw-bold mb-2"></div>
+      <div id="kuva2" class="mb-3"></div>
+      <div id="ominaisuudet" class="small text-muted"></div>
+      <div id="vastaus" class="text-danger mt-3"></div>
+    </div>
+  </main>
+
+  <footer class="container text-muted py-4">
+    © 2025 – JSON tehtävä
+  </footer>
+
+  <script>
+  // Tänne tallennetaan viimeisin haettu data
+  let viimeisinData = null;
+  let naytaTaka = false;
+
+  // Haetaan Pokemon nimen perusteella
+  function poke() {
+    const pokeName = document.getElementById("pokemonName").value.toLowerCase(); // pienillä kirjaimilla
+    const nameShown = document.getElementById("pokemonName").value; // alkuperäinen nimi
+
+    if (!pokeName) return; // jos tyhjä kenttä, ei tehdä mitään
+
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
+      .then(res => {
+        if (!res.ok) throw new Error("Pokemon ei löytynyt");
+        return res.json();
+      })
+      .then(data => {
+        viimeisinData = data;
+        naytaTaka = false; // aina aloitetaan etupuoli
+        naytaPokemon(data, nameShown);
+        document.getElementById("pokemonName").value = ""; // tyhjennetään kenttä
+        document.getElementById("kaannaBtn").classList.remove("d-none"); // näytetään käännä nappi
+        document.getElementById("vastaus").innerHTML = ""; // tyhjennä virheet
+      })
+      .catch(err => {
+        document.getElementById("vastaus").innerHTML = "Tietoa ei pystytä hakemaan";
+        console.error(err);
+      });
+  }
+
+  // Näytetään Pokemonin kuva ja tiedot
+  function naytaPokemon(obj, name) {
+    const front = obj.sprites.front_default;
+    const types = obj.types.map(t => t.type.name).join(", "); // tyyppi
+    const height = (obj.height / 10).toFixed(1) + " m";       // pituus metreinä
+    const weight = (obj.weight / 10).toFixed(1) + " kg";      // paino kiloina
+
+    document.getElementById("kuva2").innerHTML = front ? `<img src="${front}" alt="${name}" class="img-fluid">` : "(ei kuvaa)";
+    document.getElementById("nimi").innerHTML = name;
+    document.getElementById("ominaisuudet").innerHTML = `<b>Tyypit:</b> ${types} | <b>Pituus:</b> ${height} | <b>Paino:</b> ${weight}`;
+  }
+
+  // Käännetään kuva (näytetään takakuva jos löytyy)
+  function kaanna() {
+    if (!viimeisinData) return;
+    naytaTaka = !naytaTaka;
+    const front = viimeisinData.sprites.front_default;
+    const back = viimeisinData.sprites.back_default;
+    const kuva = (naytaTaka && back) ? back : front;
+
+    document.getElementById("kuva2").innerHTML = kuva ? `<img src="${kuva}" alt="pokemon" class="img-fluid">` : "(ei kuvaa)";
+  }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
