@@ -1,0 +1,41 @@
+/* Oma tyylitiedosto sivuille */
+
+/* Värit ja fontti */
+body {
+  background-color: #f8f9fa; /* vaalea tausta */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Pääalueille vähän väliä ja ilmaa */
+main {
+  padding: 2rem 0;
+}
+
+/* Kortit (Bootstrap card) vähän pehmeämmäksi */
+.card {
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Footerin tyyli */
+footer {
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Otsikko korostuu */
+h1, h2, h3 {
+  color: #0d6efd; /* bootstrapin sininen */
+}
+
+/* Kuva nätiksi */
+img {
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+/* Pieni harmaa teksti (esim. ohjeet) */
+.text-muted {
+  color: #777;
+}
