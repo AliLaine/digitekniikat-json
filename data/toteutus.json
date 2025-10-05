@@ -1,6 +1,6 @@
 {
   "toteutus_nimi": "Digitekniikat",
-  "osallistujia": 5,
+  "osallistujia": 20,
   "osallistujat": [
     "Matti Meikäläinen",
     "Laura Lehtinen",
@@ -8,8 +8,8 @@
     "Sanna Salminen",
     "Kaisa Korhonen"
   ],
-  "alku": "2025-01-13",
-  "loppu": "2025-03-14",
+  "alku": "2025-08-18",
+  "loppu": "2025-10-12",
   "kesto_viikkoina": 8,
   "kuva": "https://via.placeholder.com/900x300?text=Digitekniikat+toteutus"
 }
