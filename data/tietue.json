@@ -1,0 +1,16 @@
+{
+  "otsikko": "JSON-datan käsittely",
+  "kuvaus": "Tässä tehtävässä haetaan oma JSON-tiedosto ja näytetään sen tiedot sivulla.",
+  "kuva": "https://via.placeholder.com/900x300?text=JSON+Tehtava",
+  "opintojakso": {
+    "nimi": "Digitekniikat",
+    "tunnus": "DTK-101",
+    "opintopisteet": 5
+  },
+  "tekniikat": [
+    { "aihe": "low-code", "linkki": "https://powerapps.microsoft.com/" },
+    { "aihe": "sisällönhallintajärjestelmät", "linkki": "https://wordpress.org/" },
+    { "aihe": "responsiivinen käyttöliittymä", "linkki": "https://getbootstrap.com/" },
+    { "aihe": "tiedon haku julkisista palveluista", "linkki": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" }
+  ]
+}
